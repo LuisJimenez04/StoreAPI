@@ -28,6 +28,18 @@ namespace StoreAPI.Controllers
         {
             return Ok(await _productRepository.CreateNewProduct(product));
         }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateProduct(int idProduct, Product product)
+        {
+            return Ok(await _productRepository.UpdateProduct(idProduct, product));
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteProduct(int idProduct)
+        {
+            return Ok(await _productRepository.DeleteProduct(idProduct));
+        }
     }
 }
         //[HttpGet]
