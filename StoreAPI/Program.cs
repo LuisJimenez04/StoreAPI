@@ -1,11 +1,16 @@
+using Microsoft.EntityFrameworkCore;
 using StoreAPI.Application.Interfaces;
+using StoreAPI.Infrastructure.Data;
 using StoreAPI.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddSingleton<IProductRepository, ProductRepository>();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
